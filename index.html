@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101114">
+<title>ONE MORE SECOND</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+  <div id="bar"></div>
+  <div id="hud"><span id="hT">45.0</span><span id="hS">0</span><span id="hC"></span></div>
+
+  <section class="screen" id="title">
+    <h1>ONE<br>MORE<br>SECOND</h1>
+    <p class="sub">あなたの時間感覚は、どこまで正確か。</p>
+    <button class="btn pri" data-go="mode">PLAY</button>
+    <p class="sub" id="rec"></p>
+  </section>
+
+  <section class="screen" id="mode">
+    <h2>モードを選ぶ</h2>
+    <button class="btn" data-start="attack">SCORE ATTACK<small>45秒間、できるだけ多く正確に当てる。連続成功でコンボ倍率UP。</small></button>
+    <button class="btn" data-start="oneshot">ONE SHOT<small>挑戦は1回だけ。最小の誤差を狙う。</small></button>
+    <button class="btn ghost" data-go="title">戻る</button>
+  </section>
+
+  <section class="screen" id="ready">
+    <div class="num" id="cd">3</div>
+    <p class="sub" id="cdt"></p>
+  </section>
+
+  <section class="screen" id="play">
+    <p class="sub">目標の秒数</p>
+    <div class="num ac" id="tgt">4.0</div>
+    <div class="btn pri big" id="tap">START</div>
+    <p class="sub" id="hint"></p>
+  </section>
+
+  <section class="screen" id="judge">
+    <div id="gr">PERFECT</div>
+    <div class="num" id="er">+0.00</div>
+    <p class="sub" id="pt"></p>
+  </section>
+
+  <section class="screen" id="result">
+    <p class="sub" id="rNew"></p>
+    <div class="num ac" id="rBig">0</div>
+    <p class="sub" id="rLbl">SCORE</p>
+    <div class="grid" id="rGrid"></div>
+    <button class="btn pri" id="shareBtn">結果を共有</button>
+    <p class="sub" id="shareMsg"></p>
+    <div class="row">
+      <button class="btn" data-retry="1">もう一度</button>
+      <button class="btn" data-go="title">タイトル</button>
+    </div>
+  </section>
+</main>
+<script src="share.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
