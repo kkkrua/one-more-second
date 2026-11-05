@@ -25,12 +25,23 @@
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
   const clr = () => { timers.forEach(clearTimeout); timers = []; };
   let ac;
-  function beep(f = 660, d = .08) {
+  // AudioContext はユーザー操作の中で作って resume する(最初の音が鳴らない・遅れて固まる対策)
+  function unlock() {
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
-      const o = ac.createOscillator(), g = ac.createGain();
-      o.frequency.value = f; g.gain.value = .05; o.connect(g); g.connect(ac.destination);
-      o.start(); o.stop(ac.currentTime + d);
+      if (ac.state === 'suspended') ac.resume();
+    } catch (e) {}
+  }
+  function beep(f = 660, d = .08) {
+    try {
+      unlock();
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime + .02;
+      o.frequency.value = f;
+      g.gain.setValueAtTime(.0001, t);
+      g.gain.exponentialRampToValueAtTime(.05, t + .01);
+      g.gain.exponentialRampToValueAtTime(.0001, t + d);
+      o.connect(g); g.connect(ac.destination);
+      o.start(t); o.stop(t + d + .02);
     } catch (e) {}
   }
 
@@ -171,6 +182,7 @@
   }
 
   // ---- input ----
+  ['pointerdown', 'keydown'].forEach(ev => document.addEventListener(ev, unlock, { passive: true }));
   document.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.go) show(b.dataset.go);
