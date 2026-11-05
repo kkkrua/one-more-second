@@ -157,19 +157,7 @@
     $('#rNew').textContent = nb ? 'NEW BEST' : title;
     $('#rBig').textContent = big; $('#rLbl').textContent = bigLabel;
     $('#rGrid').innerHTML = [...stats, ['称号', title]].map(([l, v]) => `<div class="cell"><span>${l}</span><b>${v}</b></div>`).join('');
-    $('#shareMsg').textContent = '';
     show('result');
-  }
-
-  async function doShare() {
-    const b = $('#shareBtn'); if (b.disabled || !S.share) return;
-    b.disabled = true; $('#shareMsg').textContent = '画像を生成中…';
-    try {
-      const r = await OMS_Share.share(S.share);
-      $('#shareMsg').innerHTML = { shared: '共有しました。', cancel: '', downloaded: '画像を保存し、Xの投稿画面を開きました。投稿に画像を添付してください。',
-        blocked: `画像を保存しました。<a style="color:#B8F45B" target="_blank" rel="noopener" href="${OMS_Share.share.xUrl}">Xの投稿画面を開く</a>` }[r] || '';
-    } catch (e) { $('#shareMsg').textContent = '画像の生成に失敗しました。もう一度お試しください。'; }
-    b.disabled = false;
   }
 
   // ---- display loop (rAF is for display only; timing uses performance.now) ----
@@ -188,7 +176,7 @@
     if (b.dataset.go) show(b.dataset.go);
     else if (b.dataset.start) begin(b.dataset.start);
     else if (b.dataset.retry) begin(S.mode);
-    else if (b.id === 'shareBtn') doShare();
+    else if (b.id === 'xBtn' && S.share) window.open(OMS_Share.xIntent(S.share.text), '_blank', 'noopener');
     b.blur();
   });
   $('#play').addEventListener('pointerdown', e => { e.preventDefault(); act(); });

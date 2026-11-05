@@ -33,6 +33,8 @@
     return new Promise((res, rej) => c.toBlob(b => b ? res(b) : rej(new Error('png')), 'image/png'));
   }
 
+  const xIntent = text => 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(gameUrl());
+
   // returns 'shared' | 'cancel' | 'downloaded' | 'blocked'(download done, X popup blocked; xUrl set)
   async function share(d) {
     const blob = await makeImage(d);
@@ -49,11 +51,11 @@
     a.href = URL.createObjectURL(blob); a.download = 'one-more-second.png';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-    const xUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(d.text) + '&url=' + encodeURIComponent(gameUrl());
+    const xUrl = xIntent(d.text);
     share.xUrl = xUrl;
     const w = window.open(xUrl, '_blank', 'noopener');
     return w ? 'downloaded' : 'blocked';
   }
 
-  window.OMS_Share = { makeImage, share };
+  window.OMS_Share = { makeImage, share, xIntent };
 })();
