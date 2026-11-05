@@ -38,7 +38,7 @@
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime + .02;
       o.frequency.value = f;
       g.gain.setValueAtTime(.0001, t);
-      g.gain.exponentialRampToValueAtTime(.05, t + .01);
+      g.gain.exponentialRampToValueAtTime(.15, t + .01);
       g.gain.exponentialRampToValueAtTime(.0001, t + d);
       o.connect(g); g.connect(ac.destination);
       o.start(t); o.stop(t + d + .02);
