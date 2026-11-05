@@ -24,9 +24,9 @@ h2{font-size:28px;font-weight:800;margin-bottom:8px}
 #hud{position:absolute;top:max(20px,env(safe-area-inset-top));left:32px;right:32px;display:none;justify-content:space-between;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;z-index:2}
 #hC{color:var(--ac)}
 #bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--ac);transform-origin:left;display:none;z-index:3}
-body.live #hud{display:flex}body.live #bar{display:block}
+body.live #hud{display:flex}body.live #bar{display:block}body.surv #bar{display:none!important}
 #gr{font-size:48px;font-weight:900;letter-spacing:-.02em;color:var(--ac)}
-#gr.MISS{color:var(--sub)}
+#gr.MISS,#gr.OUT{color:var(--sub)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .cell{background:var(--pn);border-radius:16px;padding:12px 16px}
 .cell b{display:block;font-size:20px;margin-top:2px}.cell span{color:var(--sub);font-size:12px}
