@@ -14,16 +14,17 @@
 
   <section class="screen" id="title">
     <h1>ONE<br>MORE<br>SECOND</h1>
-    <p class="sub">あなたの時間感覚は、どこまで正確か。</p>
+    <p class="sub">あなたの時間感覚を、攻撃に変えろ。</p>
     <button class="btn pri" data-go="mode">PLAY</button>
     <p class="sub" id="rec"></p>
   </section>
 
   <section class="screen" id="mode">
     <h2>モードを選ぶ</h2>
-    <button class="btn" data-start="attack">SCORE ATTACK<small>45秒間、できるだけ多く正確に当てる。連続成功でコンボ倍率UP。</small></button>
+    <button class="btn pri" data-start="stage">STAGE BATTLE<small>通常敵5体＋ボス1体。時間感覚で敵を倒せ。</small></button>
+    <button class="btn" data-start="attack">SCORE ATTACK<small>45秒間、できるだけ多く正確に当てる。</small></button>
     <button class="btn" data-start="oneshot">ONE SHOT<small>挑戦は1回だけ。最小の誤差を狙う。</small></button>
-    <button class="btn" data-start="survival">SURVIVAL<small>許容誤差が少しずつ狭くなる。外したら即終了。何連続でクリアできる？</small></button>
+    <button class="btn" data-start="survival">SURVIVAL<small>許容誤差が少しずつ狭くなる。外したら終了。</small></button>
     <button class="btn ghost" data-go="title">戻る</button>
   </section>
 
@@ -33,9 +34,18 @@
   </section>
 
   <section class="screen" id="play">
+    <div id="battlePanel" class="battle-panel">
+      <div class="battle-top">
+        <div><span class="eyebrow" id="enemyType">ENEMY 01 / 06</span><h2 id="enemyName">SLIME</h2></div>
+        <span class="hp-label" id="enemyHp">HP 120 / 120</span>
+      </div>
+      <div class="hp-track"><div id="enemyHpFill"></div></div>
+      <div class="enemy-art" id="enemyArt"><span id="enemyGlyph">◆</span></div>
+      <p class="sub battle-meta" id="battleMeta">敵を倒して次へ進め。</p>
+    </div>
     <p class="sub">目標の秒数</p>
     <div class="num ac" id="tgt">4.0</div>
-    <div class="btn pri big" id="tap">START</div>
+    <button class="btn pri big" id="tap">START</button>
     <p class="sub" id="hint"></p>
   </section>
 
@@ -50,7 +60,7 @@
     <div class="num ac" id="rBig">0</div>
     <p class="sub" id="rLbl">SCORE</p>
     <div class="grid" id="rGrid"></div>
-    <button class="btn pri" id="xBtn">Xでポスト</button>
+    <button class="btn pri" id="xBtn">結果画像を作成してXで共有</button>
     <div class="row">
       <button class="btn" data-retry="1">もう一度</button>
       <button class="btn" data-go="title">タイトル</button>
